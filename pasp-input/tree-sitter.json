@@ -1,0 +1,43 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "pasp_input",
+      "camelcase": "PaspInput",
+      "title": "Pasp Input",
+      "scope": "source.pasp",
+      "file-types": [
+        "input",
+        "str"
+      ],
+      "injection-regex": "^pasp[-_]input$",
+      "class-name": "TreeSitterPaspInput"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "PASP input grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "LiemuR",
+        "email": "tq1l6l3cabc@163.com",
+        "url": "https://github.com/LiemuR/"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/LiemuR/tree-sitter-pasp",
+      "funding": ""
+    }
+  },
+  "bindings": {
+    "c": false,
+    "go": false,
+    "java": false,
+    "node": false,
+    "python": false,
+    "rust": false,
+    "swift": false,
+    "zig": false
+  }
+}

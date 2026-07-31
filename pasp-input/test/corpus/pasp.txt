@@ -28,7 +28,7 @@ Z_values "83 26 8"
   (setting
     (setting_key)
     (setting_value
-      (value_atom))
+      (number))
     (line_comment))
   (setting
     (setting_key)
@@ -59,21 +59,18 @@ Z_values "83 26 8"
       (block_arguments
         (block_name)
         (invalid_argument)))
-    (numeric_statement
-      (spin_vector_line
-        (number)
-        (number)
-        (number)))
-    (numeric_statement
-      (spin_vector_line
-        (number)
-        (number)
-        (number)))
-    (numeric_statement
-      (spin_vector_line
-        (number)
-        (number)
-        (number)))
+    (block_body_line
+      (number)
+      (number)
+      (number))
+    (block_body_line
+      (number)
+      (number)
+      (number))
+    (block_body_line
+      (number)
+      (number)
+      (number))
     (block_end
       (endblock_directive)
       (block_arguments

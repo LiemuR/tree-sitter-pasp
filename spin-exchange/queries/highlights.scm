@@ -1,30 +1,3 @@
-[
-  (include_directive)
-  (block_directive)
-  (endblock_directive)
-] @keyword
-
-(unknown_directive_token) @error
-(unknown_directive (invalid_argument) @error)
-(invalid_argument) @error
-
-(setting_key) @property
-
-(block_name) @namespace
-
-(include_target (path) @string.special.path)
-(string) @string
-
-((value_atom) @number
-  (#match? @number "^[+-]?(?:[0-9]+[.][0-9]*|[.][0-9]+|[0-9]+)(?:[eE][+-]?[0-9]+)?$"))
-
-((value_atom) @constant
-  (#match? @constant "^(?:[tTfF]|[.][tT][rR][uU][eE][.]|[.][fF][aA][lL][sS][eE][.])$"))
-
-((value_atom) @string
-  (#not-match? @string "^[+-]?(?:[0-9]+[.][0-9]*|[.][0-9]+|[0-9]+)(?:[eE][+-]?[0-9]+)?$")
-  (#not-match? @string "^(?:[tTfF]|[.][tT][rR][uU][eE][.]|[.][fF][aA][lL][sS][eE][.])$"))
-
 (line_comment) @comment
 
 (spin_count_line

@@ -2,23 +2,21 @@
   "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
   "grammars": [
     {
-      "name": "pasp",
-      "camelcase": "Pasp",
-      "title": "Pasp",
+      "name": "spin_exchange",
+      "camelcase": "SpinExchange",
+      "title": "Spin Exchange",
       "scope": "source.pasp",
       "file-types": [
-        "str",
-        "input",
         "spin_exchange.dat"
       ],
-      "injection-regex": "^pasp$",
-      "class-name": "TreeSitterPasp"
+      "injection-regex": "^spin[-_]exchange$",
+      "class-name": "TreeSitterSpinExchange"
     }
   ],
   "metadata": {
     "version": "0.1.0",
     "license": "MIT",
-    "description": "Pasp grammar for tree-sitter",
+    "description": "spin_exchange.dat grammar for tree-sitter",
     "authors": [
       {
         "name": "LiemuR",

@@ -1,14 +1,22 @@
 # tree-sitter-pasp
 
-Tree-sitter grammar for PASP input/config files and `spin_exchange.dat` numeric
-data files.
+Tree-sitter grammars for PASP input/config files and `spin_exchange.dat`
+numeric data files.
 
-The grammar is intentionally syntax-focused. Use `paspconfig server` for PASP
+The grammars are intentionally syntax-focused. Use `paspconfig server` for PASP
 diagnostics, completion, include navigation, document links, and spin-exchange
 hover/code-lens features.
 
-This repository keeps only the grammar, queries, parser sources, and corpus
-tests. Generated language bindings are disabled and not included.
+This repository is a small monorepo with two independent grammar packages:
+
+- `pasp-input/`: PASP input/config files such as `PASP.input`, `*.input`, and
+  included `.str` files.
+- `spin-exchange/`: `spin_exchange.dat` numeric data files.
+
+The split keeps PASP input syntax and spin-exchange numeric rows from matching
+each other's subtree shapes. Both languages can still use the same
+`paspconfig server` for diagnostics, completion, hover, navigation, and other
+semantic features.
 
 ## Highlight coverage
 
@@ -29,11 +37,11 @@ shapes conservative.
 
 ## Helix
 
-Use one grammar with two Helix languages:
+Use two grammars with two Helix languages:
 
 ```toml
 [language-server.paspconfig]
-command = "E:/llc/my_project/pasp-language/pasp_config/target/release/paspconfig"
+command = "/path/to/pasp_config/target/release/paspconfig"
 args = ["server"]
 config = { diagnosticLocale = "zh-CN" }
 
@@ -43,7 +51,7 @@ scope = "source.pasp"
 language-id = "pasp-input"
 file-types = [{ glob = "PASP.input" }, { glob = "*.input" }, { glob = "*.str" }]
 roots = ["PASP.input"]
-grammar = "pasp"
+grammar = "pasp_input"
 language-servers = ["paspconfig"]
 
 [[language]]
@@ -52,12 +60,16 @@ scope = "source.pasp"
 language-id = "spin-exchange"
 file-types = [{ glob = "spin_exchange.dat" }]
 roots = ["PASP.input"]
-grammar = "pasp"
+grammar = "spin_exchange"
 language-servers = ["paspconfig"]
 
 [[grammar]]
-name = "pasp"
-source = { path = "E:/llc/my_project/pasp-language/tree-sitter-pasp" }
+name = "pasp_input"
+source = { path = "/path/to/tree-sitter-pasp/pasp-input" }
+
+[[grammar]]
+name = "spin_exchange"
+source = { path = "/path/to/tree-sitter-pasp/spin-exchange" }
 ```
 
 After updating `languages.toml`, run:
@@ -68,23 +80,18 @@ hx --health pasp-input
 hx --health spin-exchange
 ```
 
-Helix loads queries by language name. If `pasp-input` and `spin-exchange` both
-reuse `grammar = "pasp"`, copy the query files to both runtime query
-directories:
+To install the grammar and copy the query files in one step, run:
 
 ```sh
-mkdir -p ~/.config/helix/runtime/queries/pasp-input
-mkdir -p ~/.config/helix/runtime/queries/spin-exchange
-
-cp queries/highlights.scm ~/.config/helix/runtime/queries/pasp-input/highlights.scm
-cp queries/folds.scm ~/.config/helix/runtime/queries/pasp-input/folds.scm
-cp queries/highlights.scm ~/.config/helix/runtime/queries/spin-exchange/highlights.scm
-cp queries/folds.scm ~/.config/helix/runtime/queries/spin-exchange/folds.scm
+bash install-helix.sh
 ```
+
+Helix loads queries by language name. The script copies each grammar's own
+`queries/*.scm` files into the matching runtime query directory.
 
 ## Development
 
 ```sh
-tree-sitter generate
-tree-sitter test
+(cd pasp-input && tree-sitter generate && tree-sitter test)
+(cd spin-exchange && tree-sitter generate && tree-sitter test)
 ```

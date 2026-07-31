@@ -1,5 +1,5 @@
 /**
- * @file Pasp grammar for tree-sitter
+ * @file PASP input grammar for tree-sitter
  * @author LiemuR <tq1l6l3cabc@163.com>
  * @license MIT
  */
@@ -8,7 +8,7 @@
 // @ts-check
 
 export default grammar({
-  name: "pasp",
+  name: "pasp_input",
 
   extras: $ => [/[ \t\f\v]+/],
 
@@ -23,26 +23,25 @@ export default grammar({
       $.include_statement,
       $.endblock_statement,
       $.unknown_directive,
-      $.numeric_statement,
       $.setting,
       $.comment,
     ),
 
     block: $ => prec.right(seq(
-      $.block_start,
+      field("start", $.block_start),
       $._newline,
       repeat(choice(
         seq($._block_line, $._newline),
         $.blank_line,
       )),
-      optional($.block_end),
+      optional(field("end", $.block_end)),
     )),
 
     _block_line: $ => choice(
       $.block,
       $.include_statement,
-      $.numeric_statement,
       $.setting,
+      $.unknown_directive,
       $.comment,
       $.block_body_line,
     ),
@@ -91,20 +90,6 @@ export default grammar({
       repeat($.invalid_argument),
     ),
 
-    numeric_statement: $ => prec(2, seq(
-      choice(
-        $.spin_j_matrix_line,
-        $.spin_j_scalar_line,
-        $.spin_dmi_line,
-        $.spin_four_order_coordinates,
-        $.spin_five_field_line,
-        $.spin_vector_line,
-        $.spin_count_line,
-        $.spin_data_line,
-      ),
-      optional($.line_comment),
-    )),
-
     block_body_line: $ => seq(
       repeat1($._argument),
       optional($.line_comment),
@@ -131,63 +116,7 @@ export default grammar({
     number: _ => token(prec(2, /[+-]?(?:\d+\.\d*|\.\d+|\d+)(?:[eE][+-]?\d+)?/)),
     line_comment: _ => token(/#[^\r\n]*/),
 
-    spin_count_line: $ => prec(3, $.number),
-    spin_vector_line: $ => prec(3, seq($.number, $.number, $.number)),
-    spin_five_field_line: $ => prec(3, seq($.number, $.number, $.number, $.number, $.number)),
-    spin_j_scalar_line: $ => prec(3, seq(
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-    )),
-    spin_dmi_line: $ => prec(4, seq(
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-    )),
-    spin_j_matrix_line: $ => prec(3, seq(
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-      $.number,
-    )),
-    spin_four_order_coordinates: $ => prec(3, choice(
-      seq($.number, $.number, $.number, $.number, $.number, $.number),
-      seq($.number, $.number, $.number, $.number, $.number, $.number, $.number, $.number, $.number),
-      seq($.number, $.number, $.number, $.number, $.number, $.number, $.number, $.number, $.number, $.number, $.number, $.number),
-    )),
-    spin_data_line: $ => prec(1, seq($.number, repeat(choice($.number, $.value_atom)))),
-
-    _argument: $ => choice($.string, $.value_atom),
+    _argument: $ => choice($.string, $.number, $.value_atom),
     _newline: _ => /\r?\n/,
   }
 });
