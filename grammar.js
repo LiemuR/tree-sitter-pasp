@@ -39,12 +39,12 @@ export default grammar({
     )),
 
     _block_line: $ => choice(
-        $.block,
-        $.include_statement,
-        $.numeric_statement,
-        $.setting,
-        $.comment,
-        $.block_body_line,
+      $.block,
+      $.include_statement,
+      $.numeric_statement,
+      $.setting,
+      $.comment,
+      $.block_body_line,
     ),
 
     include_statement: $ => prec.right(seq(
