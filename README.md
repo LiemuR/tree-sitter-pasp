@@ -7,6 +7,9 @@ The grammar is intentionally syntax-focused. Use `paspconfig server` for PASP
 diagnostics, completion, include navigation, document links, and spin-exchange
 hover/code-lens features.
 
+This repository keeps only the grammar, queries, parser sources, and corpus
+tests. Generated language bindings are disabled and not included.
+
 ## Helix
 
 Use one grammar with two Helix languages:

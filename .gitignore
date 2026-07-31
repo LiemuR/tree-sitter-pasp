@@ -1,40 +1,9 @@
-# Rust artifacts
-target/
-
-# Node artifacts
+# Build artifacts
 build/
-prebuilds/
-node_modules/
+target/
 
 # Editor artifacts
 .vscode/
-
-# Swift artifacts
-.build/
-
-# Go artifacts
-_obj/
-
-# Python artifacts
-.venv/
-dist/
-*.egg-info
-*.whl
-
-# C artifacts
-*.a
-*.so
-*.so.*
-*.dylib
-*.dll
-*.pc
-*.exp
-*.lib
-
-# Zig artifacts
-.zig-cache/
-zig-cache/
-zig-out/
 
 # Example dirs
 /examples/*/
