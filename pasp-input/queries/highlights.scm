@@ -8,13 +8,13 @@
 (unknown_directive (invalid_argument) @error)
 (invalid_argument) @error
 
-(setting_key) @property
+(setting_key) @attribute
 (block_name) @namespace
 
-(include_target (path) @string.special.path)
+(include_target (path) @string)
 (string) @string
 
-((number) @number)
+((number) @constant.numeric)
 
 ((value_atom) @constant
   (#match? @constant "^(?:[tTfF]|[.][tT][rR][uU][eE][.]|[.][fF][aA][lL][sS][eE][.])$"))
