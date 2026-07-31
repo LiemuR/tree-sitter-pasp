@@ -6,7 +6,11 @@ Spin exchange data document
 1 0 0
 0 1 0
 0 0 1
-1 1.25e-3 1 2 0.0 0.0 -1.5
+1 1.25e-3 1 2 0.0 0.0 -1.5 0.0 0.5 1.0
+2 1 0 0 0 1 0 0 0 1 3 4 0 0 0 1 1 1
+1 0.1 0.2 0.3 1 2 0 0 0 1 1 1
+3 2 0.5 4 5
+0 0 0 1 1 1
 0 # empty section count
 
 ---
@@ -14,27 +18,85 @@ Spin exchange data document
 (source_file
   (blank_line)
   (numeric_statement
-    (number))
+    (spin_count_line
+      (number)))
   (numeric_statement
-    (number)
-    (number)
-    (number))
+    (spin_vector_line
+      (number)
+      (number)
+      (number)))
   (numeric_statement
-    (number)
-    (number)
-    (number))
+    (spin_vector_line
+      (number)
+      (number)
+      (number)))
   (numeric_statement
-    (number)
-    (number)
-    (number))
+    (spin_vector_line
+      (number)
+      (number)
+      (number)))
   (numeric_statement
-    (number)
-    (number)
-    (number)
-    (number)
-    (number)
-    (number)
-    (number))
+    (spin_j_scalar_line
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)))
   (numeric_statement
-    (number)
+    (spin_j_matrix_line
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)))
+  (numeric_statement
+    (spin_dmi_line
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)))
+  (numeric_statement
+    (spin_five_field_line
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)))
+  (numeric_statement
+    (spin_four_order_coordinates
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)
+      (number)))
+  (numeric_statement
+    (spin_count_line
+      (number))
     (line_comment)))

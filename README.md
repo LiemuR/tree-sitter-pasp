@@ -10,6 +10,23 @@ hover/code-lens features.
 This repository keeps only the grammar, queries, parser sources, and corpus
 tests. Generated language bindings are disabled and not included.
 
+## Highlight coverage
+
+The highlight queries mirror the token groups used by `paspconfig server` as
+closely as a syntax-only grammar can:
+
+- PASP input: comments, directives, include targets, block names, setting keys,
+  string values, numeric values, boolean constants, and invalid directive
+  arguments.
+- `spin_exchange.dat`: count lines, enum-like IDs, element IDs, interaction
+  parameters, vector components, comments, and fallback numeric data.
+
+Some `spin_exchange.dat` rows are ambiguous without the LSP section parser. For
+example, five-number rows can be SIA parameter lines or four-order headers, and
+twelve-number rows can be DMI rows or type-3 four-order coordinate rows. The
+grammar highlights unambiguous shapes more specifically and leaves ambiguous
+shapes conservative.
+
 ## Helix
 
 Use one grammar with two Helix languages:
@@ -49,6 +66,20 @@ After updating `languages.toml`, run:
 hx --grammar build
 hx --health pasp-input
 hx --health spin-exchange
+```
+
+Helix loads queries by language name. If `pasp-input` and `spin-exchange` both
+reuse `grammar = "pasp"`, copy the query files to both runtime query
+directories:
+
+```sh
+mkdir -p ~/.config/helix/runtime/queries/pasp-input
+mkdir -p ~/.config/helix/runtime/queries/spin-exchange
+
+cp queries/highlights.scm ~/.config/helix/runtime/queries/pasp-input/highlights.scm
+cp queries/folds.scm ~/.config/helix/runtime/queries/pasp-input/folds.scm
+cp queries/highlights.scm ~/.config/helix/runtime/queries/spin-exchange/highlights.scm
+cp queries/folds.scm ~/.config/helix/runtime/queries/spin-exchange/folds.scm
 ```
 
 ## Development

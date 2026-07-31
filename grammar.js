@@ -69,7 +69,7 @@ export default grammar({
 
     unknown_directive: $ => prec.right(seq(
       field("directive", $.unknown_directive_token),
-      repeat($._argument),
+      repeat($.invalid_argument),
       optional($.line_comment),
     )),
 
@@ -82,18 +82,26 @@ export default grammar({
     setting_value: $ => repeat1($._argument),
 
     include_arguments: $ => seq(
-      field("target", $._argument),
-      repeat($._argument),
+      field("target", $.include_target),
+      repeat($.invalid_argument),
     ),
 
     block_arguments: $ => seq(
       field("name", $.block_name),
-      repeat($._argument),
+      repeat($.invalid_argument),
     ),
 
     numeric_statement: $ => prec(2, seq(
-      $.number,
-      repeat(choice($.number, $.data_token)),
+      choice(
+        $.spin_j_matrix_line,
+        $.spin_j_scalar_line,
+        $.spin_dmi_line,
+        $.spin_four_order_coordinates,
+        $.spin_five_field_line,
+        $.spin_vector_line,
+        $.spin_count_line,
+        $.spin_data_line,
+      ),
       optional($.line_comment),
     )),
 
@@ -112,8 +120,10 @@ export default grammar({
 
     block_name: _ => /[^\s#]+/,
     setting_key: _ => /[A-Za-z_][A-Za-z0-9_.-]*/,
-    data_token: _ => token(prec(-1, /[^\s#]+/)),
-    path: _ => /[^\s#]+/,
+    include_target: $ => choice($.string, $.path),
+    path: _ => token(prec(-1, /[^\s#]+/)),
+    value_atom: _ => token(prec(-1, /[^\s#]+/)),
+    invalid_argument: _ => token(prec(-2, /[^\s#]+/)),
     string: _ => token(prec(2, choice(
       /"([^"\\]|\\.)*"/,
       /'([^'\\]|\\.)*'/,
@@ -121,7 +131,63 @@ export default grammar({
     number: _ => token(prec(2, /[+-]?(?:\d+\.\d*|\.\d+|\d+)(?:[eE][+-]?\d+)?/)),
     line_comment: _ => token(/#[^\r\n]*/),
 
-    _argument: $ => choice($.string, $.number, $.path),
+    spin_count_line: $ => prec(3, $.number),
+    spin_vector_line: $ => prec(3, seq($.number, $.number, $.number)),
+    spin_five_field_line: $ => prec(3, seq($.number, $.number, $.number, $.number, $.number)),
+    spin_j_scalar_line: $ => prec(3, seq(
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+    )),
+    spin_dmi_line: $ => prec(4, seq(
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+    )),
+    spin_j_matrix_line: $ => prec(3, seq(
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+      $.number,
+    )),
+    spin_four_order_coordinates: $ => prec(3, choice(
+      seq($.number, $.number, $.number, $.number, $.number, $.number),
+      seq($.number, $.number, $.number, $.number, $.number, $.number, $.number, $.number, $.number),
+      seq($.number, $.number, $.number, $.number, $.number, $.number, $.number, $.number, $.number, $.number, $.number, $.number),
+    )),
+    spin_data_line: $ => prec(1, seq($.number, repeat(choice($.number, $.value_atom)))),
+
+    _argument: $ => choice($.string, $.value_atom),
     _newline: _ => /\r?\n/,
   }
 });

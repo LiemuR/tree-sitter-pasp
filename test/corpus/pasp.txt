@@ -4,9 +4,12 @@ PASP configuration
 
 Model find_J_path_sym
 fig.maxk 9 # maximum reciprocal cutoff
-%include MC.input
+GA.fix_cell .true.
+spin_lat.Lspin_int_only F
+Z_values "83 26 8"
+%include MC.input extra
 %INCLUDE "unit_cell.str"
-%block Supercell
+%block Supercell extra
 2 0 0
 0 2 0
 0 0 2
@@ -21,43 +24,62 @@ fig.maxk 9 # maximum reciprocal cutoff
   (setting
     (setting_key)
     (setting_value
-      (path)))
+      (value_atom)))
   (setting
     (setting_key)
     (setting_value
-      (number))
+      (value_atom))
     (line_comment))
-  (include_statement
-    (include_directive)
-    (include_arguments
-      (path)))
-  (include_statement
-    (include_directive)
-    (include_arguments
+  (setting
+    (setting_key)
+    (setting_value
+      (value_atom)))
+  (setting
+    (setting_key)
+    (setting_value
+      (value_atom)))
+  (setting
+    (setting_key)
+    (setting_value
       (string)))
+  (include_statement
+    (include_directive)
+    (include_arguments
+      (include_target
+        (path))
+      (invalid_argument)))
+  (include_statement
+    (include_directive)
+    (include_arguments
+      (include_target
+        (string))))
   (block
     (block_start
       (block_directive)
       (block_arguments
-        (block_name)))
+        (block_name)
+        (invalid_argument)))
     (numeric_statement
-      (number)
-      (number)
-      (number))
+      (spin_vector_line
+        (number)
+        (number)
+        (number)))
     (numeric_statement
-      (number)
-      (number)
-      (number))
+      (spin_vector_line
+        (number)
+        (number)
+        (number)))
     (numeric_statement
-      (number)
-      (number)
-      (number))
+      (spin_vector_line
+        (number)
+        (number)
+        (number)))
     (block_end
       (endblock_directive)
       (block_arguments
         (block_name))))
   (unknown_directive
     (unknown_directive_token)
-    (path))
+    (invalid_argument))
   (comment
     (line_comment)))
