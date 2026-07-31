@@ -1,0 +1,63 @@
+==================
+PASP configuration
+==================
+
+Model find_J_path_sym
+fig.maxk 9 # maximum reciprocal cutoff
+%include MC.input
+%INCLUDE "unit_cell.str"
+%block Supercell
+2 0 0
+0 2 0
+0 0 2
+%endblock Supercell
+%foo unsupported
+# comment
+
+---
+
+(source_file
+  (blank_line)
+  (setting
+    (setting_key)
+    (setting_value
+      (path)))
+  (setting
+    (setting_key)
+    (setting_value
+      (number))
+    (line_comment))
+  (include_statement
+    (include_directive)
+    (include_arguments
+      (path)))
+  (include_statement
+    (include_directive)
+    (include_arguments
+      (string)))
+  (block
+    (block_start
+      (block_directive)
+      (block_arguments
+        (block_name)))
+    (numeric_statement
+      (number)
+      (number)
+      (number))
+    (numeric_statement
+      (number)
+      (number)
+      (number))
+    (numeric_statement
+      (number)
+      (number)
+      (number))
+    (block_end
+      (endblock_directive)
+      (block_arguments
+        (block_name))))
+  (unknown_directive
+    (unknown_directive_token)
+    (path))
+  (comment
+    (line_comment)))
