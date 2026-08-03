@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "tree-sitter-cli": "0.26.9",
+    "typescript": "^5.9.0"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "generate": "cd pasp-input && tree-sitter generate && cd ../spin-exchange && tree-sitter generate",
+    "test": "tree-sitter test --grammar-path pasp-input && tree-sitter test --grammar-path spin-exchange"
+  }
+}

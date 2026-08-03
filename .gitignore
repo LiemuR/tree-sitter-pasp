@@ -1,6 +1,7 @@
 # Build artifacts
 build/
 target/
+node_modules/
 
 # Editor artifacts
 .vscode/
