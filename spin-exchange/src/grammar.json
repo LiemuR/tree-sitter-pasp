@@ -93,10 +93,6 @@
               {
                 "type": "SYMBOL",
                 "name": "spin_count_line"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "spin_data_line"
               }
             ]
           },
@@ -131,17 +127,6 @@
         "content": {
           "type": "PATTERN",
           "value": "[+-]?(?:\\d+\\.\\d*|\\.\\d+|\\d+)(?:[eE][+-]?\\d+)?"
-        }
-      }
-    },
-    "data_atom": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": -1,
-        "content": {
-          "type": "PATTERN",
-          "value": "[^\\s#]+"
         }
       }
     },
@@ -525,35 +510,6 @@
                 "name": "number"
               }
             ]
-          }
-        ]
-      }
-    },
-    "spin_data_line": {
-      "type": "PREC",
-      "value": 1,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "number"
-          },
-          {
-            "type": "REPEAT",
-            "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "number"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "data_atom"
-                }
-              ]
-            }
           }
         ]
       }

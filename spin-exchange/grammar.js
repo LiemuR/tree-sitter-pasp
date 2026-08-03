@@ -32,7 +32,6 @@ export default grammar({
         $.spin_five_field_line,
         $.spin_vector_line,
         $.spin_count_line,
-        $.spin_data_line,
       ),
       optional($.line_comment),
     )),
@@ -41,7 +40,6 @@ export default grammar({
     blank_line: $ => $._newline,
 
     number: _ => token(prec(2, /[+-]?(?:\d+\.\d*|\.\d+|\d+)(?:[eE][+-]?\d+)?/)),
-    data_atom: _ => token(prec(-1, /[^\s#]+/)),
     line_comment: _ => token(/#[^\r\n]*/),
 
     spin_count_line: $ => prec(3, $.number),
@@ -98,7 +96,6 @@ export default grammar({
       seq($.number, $.number, $.number, $.number, $.number, $.number, $.number, $.number, $.number),
       seq($.number, $.number, $.number, $.number, $.number, $.number, $.number, $.number, $.number, $.number, $.number, $.number),
     )),
-    spin_data_line: $ => prec(1, seq($.number, repeat(choice($.number, $.data_atom)))),
 
     _newline: _ => /\r?\n/,
   }

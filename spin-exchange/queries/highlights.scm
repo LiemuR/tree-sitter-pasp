@@ -4,61 +4,101 @@
   (number) @constant.numeric)
 
 (spin_vector_line
-  (number) @variable.parameter
-  (number) @variable.parameter
-  (number) @variable.parameter)
+  .
+  (number) @namespace
+  .
+  (number) @namespace
+  .
+  (number) @namespace)
 
 (spin_j_scalar_line
+  .
   (number) @constant.builtin
+  .
   (number) @constant.numeric
+  .
   (number) @type
+  .
   (number) @type
-  (number) @variable.parameter
-  (number) @variable.parameter
-  (number) @variable.parameter
-  (number) @variable.parameter
-  (number) @variable.parameter
-  (number) @variable.parameter)
+  .
+  (number) @namespace
+  .
+  (number) @namespace
+  .
+  (number) @namespace
+  .
+  (number) @namespace
+  .
+  (number) @namespace
+  .
+  (number) @namespace)
 
 (spin_j_matrix_line
+  .
   (number) @constant.builtin
+  .
   (number) @constant.numeric
+  .
   (number) @constant.numeric
+  .
   (number) @constant.numeric
+  .
   (number) @constant.numeric
+  .
   (number) @constant.numeric
+  .
   (number) @constant.numeric
+  .
   (number) @constant.numeric
+  .
   (number) @constant.numeric
+  .
   (number) @constant.numeric
+  .
   (number) @type
+  .
   (number) @type
-  (number) @variable.parameter
-  (number) @variable.parameter
-  (number) @variable.parameter
-  (number) @variable.parameter
-  (number) @variable.parameter
-  (number) @variable.parameter)
+  .
+  (number) @namespace
+  .
+  (number) @namespace
+  .
+  (number) @namespace
+  .
+  (number) @namespace
+  .
+  (number) @namespace
+  .
+  (number) @namespace)
 
 (spin_dmi_line
+  .
   (number) @constant.builtin
+  .
   (number) @constant.numeric
+  .
   (number) @constant.numeric
+  .
   (number) @constant.numeric
+  .
   (number) @type
+  .
   (number) @type
-  (number) @variable.parameter
-  (number) @variable.parameter
-  (number) @variable.parameter
-  (number) @variable.parameter
-  (number) @variable.parameter
-  (number) @variable.parameter)
+  .
+  (number) @namespace
+  .
+  (number) @namespace
+  .
+  (number) @namespace
+  .
+  (number) @namespace
+  .
+  (number) @namespace
+  .
+  (number) @namespace)
 
 (spin_four_order_coordinates
-  (number) @variable.parameter)
+  (number) @namespace)
 
 (spin_five_field_line
-  (number) @constant.numeric)
-
-(spin_data_line
   (number) @constant.numeric)

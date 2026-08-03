@@ -27,13 +27,17 @@ closely as a syntax-only grammar can:
   string values, numeric values, boolean constants, and invalid directive
   arguments.
 - `spin_exchange.dat`: count lines, enum-like IDs, element IDs, interaction
-  parameters, vector components, comments, and fallback numeric data.
+  parameters, vector components, coordinates, and comments.
 
 Some `spin_exchange.dat` rows are ambiguous without the LSP section parser. For
 example, five-number rows can be SIA parameter lines or four-order headers, and
 twelve-number rows can be DMI rows or type-3 four-order coordinate rows. The
 grammar highlights unambiguous shapes more specifically and leaves ambiguous
 shapes conservative.
+
+The `spin-exchange` grammar intentionally avoids a catch-all numeric row rule and
+does not define fold regions. This keeps large `spin_exchange.dat` files
+responsive in Helix.
 
 ## Helix
 
