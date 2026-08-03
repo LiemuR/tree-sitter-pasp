@@ -13,6 +13,8 @@ node_modules/
 *.wasm
 *.obj
 *.o
+*.exp
+*.lib
 
 # Archives
 *.tar.gz
