@@ -1,7 +1,7 @@
 (line_comment) @comment
 
 (spin_count_line
-  (number) @constant.numeric)
+  (number) @keyword.control)
 
 (spin_vector_line
   .
@@ -13,7 +13,7 @@
 
 (spin_j_scalar_line
   .
-  (number) @constant.builtin
+  (number) @label
   .
   (number) @constant.numeric
   .
@@ -35,7 +35,7 @@
 
 (spin_j_matrix_line
   .
-  (number) @constant.builtin
+  (number) @label
   .
   (number) @constant.numeric
   .
@@ -73,7 +73,7 @@
 
 (spin_dmi_line
   .
-  (number) @constant.builtin
+  (number) @label
   .
   (number) @constant.numeric
   .
@@ -101,4 +101,13 @@
   (number) @namespace)
 
 (spin_five_field_line
-  (number) @constant.numeric)
+  .
+  (number) @label
+  .
+  (number) @type
+  .
+  (number) @constant.numeric
+  .
+  (number) @type
+  .
+  (number) @type)

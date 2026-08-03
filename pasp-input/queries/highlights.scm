@@ -2,7 +2,7 @@
   (include_directive)
   (block_directive)
   (endblock_directive)
-] @keyword
+] @keyword.directive
 
 (unknown_directive_token) @error
 (unknown_directive (invalid_argument) @error)
