@@ -14,7 +14,7 @@
     }
   ],
   "metadata": {
-    "version": "0.1.0",
+    "version": "0.2.0",
     "license": "MIT",
     "description": "spin_exchange.dat grammar for tree-sitter",
     "authors": [
@@ -35,7 +35,7 @@
     "java": false,
     "node": false,
     "python": false,
-    "rust": false,
+    "rust": true,
     "swift": false,
     "zig": false
   }

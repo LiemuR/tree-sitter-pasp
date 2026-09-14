@@ -1,0 +1,36 @@
+===========================
+Invalid fields retain their column
+===========================
+1 bad 2 3
+1bad 1e+ 1+2 # invalid atoms
+-1 .5 1.e2
+---
+(source_file
+  (row
+    (field (number))
+    (field (invalid_atom))
+    (field (number))
+    (field (number)))
+  (row
+    (field (invalid_atom))
+    (field (invalid_atom))
+    (field (invalid_atom))
+    (line_comment))
+  (row
+    (field (number))
+    (field (number))
+    (field (number))))
+
+===========================
+Comments and empty sections
+===========================
+# section
+
+0
+0 # next section
+---
+(source_file
+  (comment (line_comment))
+  (blank_line)
+  (row (field (number)))
+  (row (field (number)) (line_comment)))

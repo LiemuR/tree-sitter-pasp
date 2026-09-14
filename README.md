@@ -26,18 +26,46 @@ closely as a syntax-only grammar can:
 - PASP input: comments, directives, include targets, block names, setting keys,
   string values, numeric values, boolean constants, and invalid directive
   arguments.
-- `spin_exchange.dat`: count lines, enum-like IDs, element IDs, interaction
-  parameters, vector components, coordinates, and comments.
+- `spin_exchange.dat`: numeric fields, invalid fields, and comments. Section
+  roles (counts, IDs, interactions and vectors) are provided by LSP semantics.
 
 Some `spin_exchange.dat` rows are ambiguous without the LSP section parser. For
 example, five-number rows can be SIA parameter lines or four-order headers, and
 twelve-number rows can be DMI rows or type-3 four-order coordinate rows. The
-grammar highlights unambiguous shapes more specifically and leaves ambiguous
-shapes conservative.
+grammar preserves rows and fields without inferring section roles from column
+counts. Every invalid atom retains its field position, including `1bad` and
+incomplete exponents such as `1e+`.
 
-The `spin-exchange` grammar intentionally avoids a catch-all numeric row rule and
-does not define fold regions. This keeps large `spin_exchange.dat` files
-responsive in Helix.
+Version 0.2 changes the spin node contract to `row -> field -> number | invalid_atom`.
+Consumers of the old `spin_*_line` nodes must migrate. The grammar does not define
+fold regions; editor performance must be measured separately from parse throughput.
+
+## Rust bindings
+
+The workspace provides `tree-sitter-pasp-input` and `tree-sitter-spin-exchange`.
+Each exports `LANGUAGE`, `NODE_TYPES`, `HIGHLIGHTS_QUERY` and `GRAMMAR_VERSION`;
+PASP also exports `FOLDS_QUERY`. Generated parser, node types and queries are
+versioned together. Use a fixed Git revision when depending on this repository.
+
+```rust
+let mut parser = tree_sitter::Parser::new();
+parser.set_language(&tree_sitter_pasp_input::LANGUAGE.into())?;
+let tree = parser.parse("Model 1\n", None).unwrap();
+```
+
+```sh
+npm ci
+npm run typecheck
+npm run generate
+npm test
+cargo fmt --all --check
+cargo test --workspace --locked
+git diff --exit-code
+```
+
+C compilation uses the `cc` crate. Windows requires the MSVC C toolchain;
+cross-compilation requires a target C compiler/sysroot in addition to Rust's
+target libraries. CI builds GNU x86_64/aarch64 and musl x86_64 libraries.
 
 ## Helix
 

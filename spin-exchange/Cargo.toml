@@ -1,0 +1,22 @@
+[package]
+name = "tree-sitter-spin-exchange"
+version = "0.2.0"
+edition = "2024"
+license = "MIT"
+description = "Spin exchange row grammar and queries for Tree-sitter"
+repository = "https://github.com/LiemuR/tree-sitter-pasp"
+build = "bindings/rust/build.rs"
+include = ["bindings/rust/**", "src/**", "queries/**", "grammar.js", "tree-sitter.json"]
+
+[lib]
+path = "bindings/rust/lib.rs"
+
+[dependencies]
+tree-sitter-language.workspace = true
+
+[build-dependencies]
+cc.workspace = true
+
+[dev-dependencies]
+tree-sitter.workspace = true
+serde_json.workspace = true

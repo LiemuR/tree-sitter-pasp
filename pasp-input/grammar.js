@@ -29,12 +29,14 @@ export default grammar({
 
     block: $ => prec.right(seq(
       field("start", $.block_start),
-      $._newline,
-      repeat(choice(
-        seq($._block_line, $._newline),
-        $.blank_line,
+      optional(seq(
+        $._newline,
+        repeat(choice(
+          seq($._block_line, $._newline),
+          $.blank_line,
+        )),
+        optional(field("end", $.block_end)),
       )),
-      optional(field("end", $.block_end)),
     )),
 
     _block_line: $ => choice(
@@ -101,7 +103,7 @@ export default grammar({
     include_directive: _ => token(prec(3, /%[iI][nN][cC][lL][uU][dD][eE]/)),
     block_directive: _ => token(prec(3, /%[bB][lL][oO][cC][kK]/)),
     endblock_directive: _ => token(prec(3, /%[eE][nN][dD][bB][lL][oO][cC][kK]/)),
-    unknown_directive_token: _ => token(prec(1, /%[^\s#]+/)),
+    unknown_directive_token: _ => token(prec(3, /%[^\s#]+/)),
 
     block_name: _ => /[^\s#]+/,
     setting_key: _ => /[A-Za-z_][A-Za-z0-9_.-]*/,
