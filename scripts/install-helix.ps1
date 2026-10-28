@@ -12,7 +12,7 @@ $ErrorActionPreference = 'Stop'
 
 function Show-Usage {
     @'
-Usage: .\install-helix.ps1 [-SkipGenerate] [-SkipBuild]
+Usage: .\scripts\install-helix.ps1 [-SkipGenerate] [-SkipBuild]
 
 Build and install the local PASP Tree-sitter grammars for Helix.
 
@@ -62,7 +62,7 @@ if ($Help) {
     exit 0
 }
 
-$repositoryRoot = $PSScriptRoot
+$repositoryRoot = Split-Path -Parent $PSScriptRoot
 $configHome = if ($env:XDG_CONFIG_HOME) { $env:XDG_CONFIG_HOME } else { $env:APPDATA }
 $helixConfigDirectory = Join-Path $configHome 'helix'
 $helixRuntimeDirectory = Join-Path $helixConfigDirectory 'runtime'

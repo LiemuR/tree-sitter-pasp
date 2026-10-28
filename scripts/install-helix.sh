@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-repo_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+repo_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 config_home="${XDG_CONFIG_HOME:-$HOME/.config}"
 export XDG_CONFIG_HOME="$config_home"
 helix_config_dir="$config_home/helix"
@@ -12,7 +12,7 @@ grammar_dirs=("pasp-input" "spin-exchange")
 
 usage() {
   cat <<'USAGE'
-Usage: bash install-helix.sh [--skip-generate] [--skip-build]
+Usage: bash scripts/install-helix.sh [--skip-generate] [--skip-build]
 
 Build and install the local PASP Tree-sitter grammars for Helix.
 

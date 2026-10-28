@@ -115,7 +115,13 @@ hx --health spin-exchange
 To install the grammar and copy the query files in one step, run:
 
 ```sh
-bash install-helix.sh
+bash scripts/install-helix.sh
+```
+
+On Windows, run from PowerShell:
+
+```powershell
+.\scripts\install-helix.ps1
 ```
 
 Helix loads queries by language name. The script copies each grammar's own
